@@ -17,7 +17,7 @@ fi
 # For all files provided as arguments.
 for FILE in "$@"
 do
-    RESULT="$(astyle    --style=1tbs \
+    RESULT="$(astyle    --style=google \
                         --indent-col1-comments \
                         --break-blocks \
                         --pad-oper \
