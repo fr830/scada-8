@@ -8,6 +8,8 @@ void main(void) {
     DDRA |= _BV(PA0);
     DDRA |= _BV(PA2);
     DDRA |= _BV(PA4);
+    DDRB |= _BV(DDB7);
+    PORTB &= ~_BV(PORTB7);
 
     while (1) {
         PORTA |= _BV(PA4);
