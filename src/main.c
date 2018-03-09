@@ -30,7 +30,19 @@ static inline void blink_leds(void) {
     _delay_ms(BLINK_DELAY_MS);
 }
 
+static inline void init_errcon(void) {
+    simple_uart1_init();
+    stderr = &simple_uart1_out;
+    fprintf(stderr,
+            "Version: %s built on: %s %s\navr-libc version: %s avr-gcc version: %s\n",
+            FW_VERSION, __DATE__, __TIME__, __AVR_LIBC_VERSION_STRING__, __VERSION__);
+}
+
+
 void main(void) {
+    init_leds();
+    init_errcon();
+
     while (1) {
         blink_leds();
     }
