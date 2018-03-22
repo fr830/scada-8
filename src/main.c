@@ -42,31 +42,9 @@ static inline void init_errcon(void) {
 void main(void) {
     init_leds();
     init_errcon();
-    /* Test assert - REMOVE IN FUTURE LABS */
-    char *array;
-    uint32_t i = 1;
-    extern int __heap_start, *__brkval;
-    int v;
-    /* As sizeof(char) is guaranteed to be 1 it is left here only for better
-     * understanding how malloc works. No need to add it in production.
-     */
-    array = malloc( i * sizeof(char));
-    assert(array != NULL);
-    /* End test assert */
 
     while (1) {
         blink_leds();
-        /* Test assert - REMOVE IN FUTURE LABS */
-        /*
-         * Increase memory allocated for array by 100 chars
-         * until we have eaten it all and print space between stack and heap.
-         * That is how assert works in run-time.
-         */
-        array = realloc( array, (i++ * 100) * sizeof(char));
-        fprintf(stderr, "%d\n",
-                (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval));
-        assert(array != NULL);
-        /* End test assert */
     }
 }
 
