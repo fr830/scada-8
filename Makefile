@@ -45,7 +45,7 @@ OBJ = $(SRC:.c=.o)
 # -Os Optimize code. The special option -Os is meant to turn on all -O2.
 # optimisations that are not expected to increase code size.
 # -std=c11 use C11 standard.
-CFLAGS =	-Wall \
+CFLAGS =		-Wall \
 			-Wextra \
 			-Wpedantic \
 			-Wformat \
@@ -53,14 +53,21 @@ CFLAGS =	-Wall \
 			-Werror \
 			-Wfatal-errors \
 			-Os \
+			-flto \
+			-fdata-sections \
+			-ffunction-sections \
 			-std=c11 \
 			-ffreestanding \
 			-mmcu=$(MCU) \
 			-DF_CPU=$(MCU_CPU_FREQ) \
-			-DFW_VERSION=$(GIT_DESCR)
+			-DFW_VERSION=$(GIT_DESCR) \
+			-DUSART0_ENABLED \
+			-DUSART1_ENABLED
 
 # Linker flags
-LDFLAGS =	-mmcu=$(MCU)
+LDFLAGS =	-mmcu=$(MCU) \
+			-flto \
+			-Wl,-gc-sections
 
 # Object copy arguments
 # Do not copy EEPROM section content
@@ -122,4 +129,3 @@ size:
 	$(AVRSIZE) $(AVRSIZEARGS) $(ELF)
 
 .PHONY: all clean dist-clean install erase format size
-

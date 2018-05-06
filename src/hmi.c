@@ -1,7 +1,7 @@
 #include <avr/pgmspace.h>
+#include "hmi.h"
 
 const char stud_name[] PROGMEM = "Mikus Secret";
-
 const char m1[] PROGMEM = "January";
 const char m2[] PROGMEM = "February";
 const char m3[] PROGMEM = "March";
